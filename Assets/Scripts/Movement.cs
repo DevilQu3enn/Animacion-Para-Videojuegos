@@ -11,8 +11,6 @@ public class Movement : MonoBehaviour
     private int velXId;
     private int velYId;
 
-#if UNITY_EDITOR
-
     private void OnValidate()
     {
         Move(motionDebug);
