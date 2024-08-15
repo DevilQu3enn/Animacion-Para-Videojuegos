@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-3375356209187661139
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rifle Idle
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -203655887218126122, guid: e6ca0477407b28640b562eea578be0f8,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-2000767645005608465
 AnimatorState:
   serializedVersion: 6
@@ -33,7 +60,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Main
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2000767645005608465}
@@ -68,7 +95,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 11c198659c310c1478188458f3376540,
       type: 3}
-    m_Threshold: 0.14285715
+    m_Threshold: 0.125
     m_Position: {x: 0, y: 0.3}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -77,7 +104,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: ce252c6d266c5a64b827f429023ebb9b,
       type: 3}
-    m_Threshold: 0.2857143
+    m_Threshold: 0.25
     m_Position: {x: 0, y: 0.6}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -86,7 +113,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 5f5ff441c7bdee34c9d46918d068b3f4,
       type: 3}
-    m_Threshold: 0.42857143
+    m_Threshold: 0.375
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -95,7 +122,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: db7dd239373ad3c499e4e6d79d0a1401,
       type: 3}
-    m_Threshold: 0.5714286
+    m_Threshold: 0.5
     m_Position: {x: -0.3, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -104,7 +131,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 12d338961badfe842aaa9ecbba62c29d,
       type: 3}
-    m_Threshold: 0.71428573
+    m_Threshold: 0.625
     m_Position: {x: 0.3, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -113,7 +140,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 60489e4174534df4aa25560ca4bba0f7,
       type: 3}
-    m_Threshold: 0.85714287
+    m_Threshold: 0.75
     m_Position: {x: -0.6, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -122,8 +149,17 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: bc37cfd448e498540b02188df1e616ee,
       type: 3}
-    m_Threshold: 1
+    m_Threshold: 0.875
     m_Position: {x: 0.6, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 14c62ee2ed95f5c4f894bb7b503c915f,
+      type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: -0.3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: VelX
@@ -158,7 +194,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: Main
     m_StateMachine: {fileID: -414056535332001689}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -169,3 +205,72 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Weapons
+    m_StateMachine: {fileID: 1119638724161721790}
+    m_Mask: {fileID: 31900000, guid: a852f942d240c814ebe84d01cc3c4f4d, type: 2}
+    m_Motions:
+    - serializedVersion: 2
+      m_State: {fileID: -2000767645005608465}
+      m_Motion: {fileID: -203655887218126122, guid: e6ca0477407b28640b562eea578be0f8,
+        type: 3}
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: MainContribution
+    m_StateMachine: {fileID: 6148268634629629148}
+    m_Mask: {fileID: 31900000, guid: 7a017a9384d70f94cb78fcbd10cb80c7, type: 2}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 1
+    m_SyncedLayerIndex: 0
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+--- !u!1107 &1119638724161721790
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Weapons
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: -3375356209187661139}
+    m_Position: {x: 319.08942, y: 118.79324, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: -3375356209187661139}
+--- !u!1107 &6148268634629629148
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MainContribution
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}

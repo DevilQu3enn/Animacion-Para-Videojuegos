@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e6ca0477407b28640b562eea578be0f8
+guid: bf38ac6db6033ea4d84fde996b35b040
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Rifle Idle
+      name: Rifle Aiming Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 178
+      lastFrame: 93
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -50,7 +50,7 @@ ModelImporter:
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1

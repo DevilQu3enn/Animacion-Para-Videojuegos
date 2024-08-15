@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e6ca0477407b28640b562eea578be0f8
+guid: d9e2e1ecfa5e5a94ab9a1429ae1ae8b2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -17,10 +17,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
-      : position error = 43.187275 mm\n\t'mixamorig:LeftLeg' : position error = 26.617504
-      mm\n\t'mixamorig:LeftToeBase' : position error = 22.635733 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -36,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Rifle Idle
+      name: Pistol Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 178
+      lastFrame: 249
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -50,7 +47,7 @@ ModelImporter:
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
