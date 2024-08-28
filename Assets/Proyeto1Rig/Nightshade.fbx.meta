@@ -3,12 +3,17 @@ guid: eb14c06bc36d2e646b30c72894b86690
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nightshade_MAT
+    second: {fileID: 2100000, guid: 7c52e1daef367b64fbb4e3afd46362e7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
