@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControllerFinal : MonoBehaviour
 {
@@ -8,27 +9,39 @@ public class PlayerControllerFinal : MonoBehaviour
     public float jumpForce = 7f;
     public float turnSpeed = 10f;
     public float continueComboTime = 1f;
-    private float comboTime;
+
 
     private Rigidbody rb;
     private Animator anim;
+    private CharacterStatus characterStatus;
 
-    private int attackIndex = 0;
-    private bool comboActive;
-    private bool attackInputLocked;
-    
+    private bool isAttacking;
+    private bool isContinuingCombo;
+    private bool isAttackInputLocked;
+
+    [SerializeField] private PlayerDamage playerPunchDamage;
+    [SerializeField] private PlayerDamage playerKickDamage;
+
+    [SerializeField] private float softPunchDamage;
+    [SerializeField] private float strongPunchDamage;
+    [SerializeField] private float softKickDamage;
+    [SerializeField] private float strongKickDamage;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
+        characterStatus = GetComponent<CharacterStatus>();
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        if(!comboActive)
+        if (!isAttacking)
             Move();
+
         Attack();
     }
 
@@ -37,52 +50,91 @@ public class PlayerControllerFinal : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = new Vector3(moveX, 0f, moveZ).normalized * moveSpeed;
+        // Entrada de movimiento en base al forward del personaje
+        Vector3 localMoveDirection = new Vector3(moveX, 0f, moveZ).normalized;
+        Vector3 moveDirection = transform.TransformDirection(localMoveDirection) * moveSpeed;
 
+        // Aplicar la velocidad al Rigidbody
         Vector3 velocity = new Vector3(moveDirection.x, rb.velocity.y, moveDirection.z);
         rb.velocity = velocity;
 
-        if (moveDirection != Vector3.zero)
+        // Rotación del personaje solo si el movimiento es hacia adelante o lateral
+        if (localMoveDirection.z >= 0 && localMoveDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
         }
 
+        // Activar o desactivar la animación de movimiento
+        anim.SetBool("IsMoving", localMoveDirection.magnitude > 0);
+    }
 
 
-        if (moveDirection.magnitude > 0)
+
+    void Attack()
+    {
+        if (Input.GetButtonDown("Fire1") && characterStatus.Stamina >= 10 && !isAttackInputLocked)
         {
-            anim.SetBool("IsMoving", true);
+            isAttackInputLocked = true;
+            characterStatus.UpdateStamina(10);
+            if (isAttacking && !isContinuingCombo)
+            {
+                isContinuingCombo = true;
+            }
+
+            isAttacking = true;
+            anim.SetBool("PunchAttack", true);
+            anim.SetBool("IsAttacking", isAttacking);
+        }
+
+        if (Input.GetButtonDown("Fire2") && characterStatus.Stamina >= 15 && !isAttackInputLocked)
+        {
+            isAttackInputLocked = true;
+            characterStatus.UpdateStamina(15);
+            if (isAttacking && !isContinuingCombo)
+            {
+                isContinuingCombo = true;
+            }
+
+            isAttacking = true;
+            anim.SetBool("PunchAttack", false);
+            anim.SetBool("IsAttacking", isAttacking);
+        }
+
+    }
+
+    public void UnlockAttackInput()
+    {
+        isAttackInputLocked = false;
+    }
+
+    public void EndAttack()
+    {
+
+        if (!isContinuingCombo)
+        {
+            isAttacking = false;
+            anim.SetBool("IsAttacking", isAttacking);
+            anim.SetBool("PunchAttack", false);
         }
         else
         {
-            anim.SetBool("IsMoving", false);
+            isContinuingCombo = false;
         }
+
     }
 
-    void Attack(){
-        if(Input.GetButtonDown("Fire1")){
-            if(!comboActive){
-                attackIndex = 0;
-            }else{
-                if(attackIndex + 1 > 2){
-                    attackIndex = 0;
-                }else{
-                    attackIndex++;
-                }
-            }
-            anim.SetTrigger("ContinueAttack");
-            anim.SetBool("IsAttacking", true);
-            comboActive = true;
-            comboTime = continueComboTime;
+    public void SetUpDamage(bool isPunch, DamagePayload.Severity severity)
+    {
+        if (isPunch)
+        {
+            float damage = severity == DamagePayload.Severity.soft ? softPunchDamage : strongPunchDamage;
+            playerPunchDamage.SetValues(damage, severity);
         }
-
-        if(comboActive){
-            comboTime -= Time.deltaTime;
-            if(comboTime <= 0){
-                comboActive = false;
-                anim.SetBool("IsAttacking", false);
-            }
+        else
+        {
+            float damage = severity == DamagePayload.Severity.soft ? softKickDamage : strongKickDamage;
+            playerKickDamage.SetValues(damage, severity);
         }
     }
 }
